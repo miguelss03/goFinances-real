@@ -1,15 +1,18 @@
-import React from 'react';
-import AppLoading from 'expo-app-loading'
-import theme from './src/global/styles/theme';
-import { ThemeProvider } from 'styled-components';
-import { Dashboard } from './src/screens/Dashboard';
-import { CategorySelect } from './src/screens/CategorySelect';
 import {
-  useFonts,
   Poppins_400Regular,
   Poppins_500Medium,
-  Poppins_700Bold
+  Poppins_700Bold, useFonts
 } from '@expo-google-fonts/poppins';
+import { Routes } from './src/routes';
+import AppLoading from 'expo-app-loading';
+import 'intl';
+import 'intl/locale-data/jsonp/pt-BR';
+import React from 'react';
+import { StatusBar } from 'react-native';
+import 'react-native-gesture-handler';
+import { ThemeProvider } from 'styled-components';
+import theme from './src/global/styles/theme';
+import { AuthProvider, useAuth } from './src/hooks/auth';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -18,14 +21,18 @@ export default function App() {
     Poppins_700Bold
   });
 
-  if (!fontsLoaded) {
+  const { userStorageLoading } = useAuth();
+
+  if (!fontsLoaded || userStorageLoading) {
     return <AppLoading />
   }
 
   return (
     <ThemeProvider theme={theme}>
-      <CategorySelect />
+      <StatusBar barStyle='light-content' />
+      <AuthProvider>
+        <Routes />
+      </AuthProvider>
     </ThemeProvider>
   );
 }
-

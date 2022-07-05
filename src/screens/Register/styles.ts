@@ -1,9 +1,10 @@
 import styled from 'styled-components/native';
 import { RFValue } from 'react-native-responsive-fontsize';
+import {TouchableOpacity} from 'react-native';
 
 export const Container = styled.View`
    flex:1;
-   background-color: ${({ theme}) => theme.colors.background};
+   background-color: ${({ theme }) => theme.colors.background};
 `;
 
 export const Header = styled.View`
@@ -41,4 +42,20 @@ export const TransactionTypes = styled.View`
     margin-top: 8px;
     margin-bottom: 16px;
 
+`;
+
+export const SendButton = styled(TouchableOpacity)`
+    width: 100%;
+    background-color:${({ theme }) => theme.colors.secondary};
+
+    padding: 18px;
+    border-radius: 5px;
+    align-items: center;
+`;
+
+export const TextSend = styled.Text`
+    font-family: ${({ theme }) => theme.fonts.medium};
+    font-size: ${RFValue(16)}px;
+
+    color: ${({ theme }) => theme.colors.shape};
 `;

@@ -46,7 +46,6 @@ export function HighlightCard({
                     {lastTransaction}
                 </LastTransaction>
             </Footer>
-
         </Container>
     )
 }
